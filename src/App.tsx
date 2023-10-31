@@ -1,12 +1,24 @@
-
 import './App.css'
+import {Routes , Route} from 'react-router-dom'
+import Layout from './Components/Layout/Layout'
+import Home from './Pages/Home'
+import LoginModal from './Components/modals/LoginModal'
+import RegisterModal from './Components/modals/RegisterModal'
 
 function App() {
 
 
   return (
     <>
-    <h1 className='text-4xl text-sky-500'>  twitter clone</h1>
+     <LoginModal/>
+     <RegisterModal/>
+      <Routes>
+         <Route path='/' element={<Layout />}>
+           
+           <Route index element={<Home/>} />
+          </Route>
+        
+      </Routes>
     </>
   )
 }
