@@ -123,8 +123,9 @@ export const userLoginController = async(req : Request , res : Response) => {
             , {expiresIn : '24h'});
    
        
-       return res.cookie("authToken" , token , {maxAge : 60 * 60 * 24}).status(201).json({
+       return res.status(201).json({
            ok : true,
+           token : token,
            msg : "Successful",
            user : exisingUserByUsername
        })

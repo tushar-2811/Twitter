@@ -1,14 +1,10 @@
-// import {useRecoilState} from 'recoil'
-
-// import { LoginModalSelector } from '../Store/Selectors/LoginModalSelector'
-
+import Header from "../Components/UI/Header/Header"
 
 const Home = () => {
-
-    
+  
   return (
-    <div className='text-white' >
-       Tushar
+    <div >
+       <Header  label="Home" />
     </div>
   )
 }

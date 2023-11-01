@@ -4,42 +4,59 @@ import Modal from "../UI/modal/Modal"
 import {useRecoilValue , useSetRecoilState} from 'recoil'
 import Input from "../UI/Input/Input";
 import { RegisterModalSelector } from "../../Store/Selectors/RegisterModalSelector";
+import toast from 'react-hot-toast'
+import axios from 'axios'
+import Cookies from 'js-cookie'
+import { useNavigate } from "react-router-dom";
 
 
 const LoginModal = () => {
    const loginModal = useRecoilValue(LoginModalSelector);
+   const registerModal =useRecoilValue(RegisterModalSelector);
    const setRegisterModal = useSetRecoilState(RegisterModalSelector);
    const setLoginModal = useSetRecoilState(LoginModalSelector);
    const [isLoading , setIsLoading] = useState(false);
    const [username , setUsername] = useState("");
    const [password , setPassword] = useState("");
 
+   const navigate = useNavigate();
+
    const handleClose = () => {
       setLoginModal({isOpen : false});
    }
 
-   const handleSignUpButton = () => {
+   const handleSignUpButton = useCallback(() => {
     if(isLoading){
       return;
     }
       setLoginModal({isOpen : false});
       setRegisterModal({isOpen : true});
-   }
+   },[loginModal ,registerModal ])
 
-   const handleSubmit = useCallback(() => {
+   const handleSubmit = useCallback(async() => {
         try {
-          if(isLoading){
-            return;
-          }
-
+          setIsLoading(true);
           // submit the form and login
+          const {data} = await axios.post("http://127.0.0.1:8000/api/v1/auth/login" , {username , password});
+           setIsLoading(false);
+           console.log(data);
+
+           if(data.ok){
+              setLoginModal({isOpen : false});
+              Cookies.set('authToken' , data.token);
+              navigate('/');
+              toast.success(data.msg);
+           }else{
+            toast.error(data.msg);
+           }
           
         } catch (error) {
            console.log(error);
+           toast.error("something went wrong");
         } finally {
            setIsLoading(false);
         }
-   },[loginModal])
+   },[loginModal , username, password])
 
    const bodyContent = (
       <div className="flex flex-col gap-2">

@@ -4,6 +4,8 @@ import Layout from './Components/Layout/Layout'
 import Home from './Pages/Home'
 import LoginModal from './Components/modals/LoginModal'
 import RegisterModal from './Components/modals/RegisterModal'
+import { Toaster } from 'react-hot-toast'
+import Profile from './Pages/Profile'
 
 function App() {
 
@@ -12,10 +14,11 @@ function App() {
     <>
      <LoginModal/>
      <RegisterModal/>
+     <Toaster/>
       <Routes>
-         <Route path='/' element={<Layout />}>
-           
+         <Route path='/' element={<Layout />}> 
            <Route index element={<Home/>} />
+           <Route path='profile/:userId/:name' element={<Profile/>} />
           </Route>
         
       </Routes>

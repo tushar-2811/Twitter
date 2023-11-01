@@ -4,6 +4,8 @@ import Modal from "../UI/modal/Modal"
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 import Input from "../UI/Input/Input";
 import { RegisterModalSelector } from "../../Store/Selectors/RegisterModalSelector";
+import axios from 'axios'
+import toast from "react-hot-toast";
 
 
 const RegisterModal = () => {
@@ -29,20 +31,32 @@ const RegisterModal = () => {
     setLoginModal({isOpen : true});
   }
 
-  const handleSubmit = useCallback(() => {
+  const handleSubmit = useCallback(async() => {
     try {
-      if (isLoading) {
-        return;
-      }
-
+     
+       setIsLoading(true);
       // submit the form and login
+      const {data} = await axios.post("http://127.0.0.1:8000/api/v1/auth/register" , {
+        name , username , email ,password
+      })
 
+      setIsLoading(false);
+       
+      if(data.ok){
+        setRegisterModal({isOpen : false});
+        toast.success(data.msg);
+        setLoginModal({isOpen : true});
+      }else{
+        toast.error(data.msg)
+      }
+   
     } catch (error) {
       console.log(error);
+      toast.error("something went wrong");
     } finally {
       setIsLoading(false);
     }
-  }, [registerModal])
+  }, [email, password, registerModal, username, name])
 
   const bodyContent = (
     <div className="flex flex-col gap-2">
