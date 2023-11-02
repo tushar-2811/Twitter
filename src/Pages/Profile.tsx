@@ -6,6 +6,7 @@ import Header from "../Components/UI/Header/Header"
 import UserHeader from "../Components/UI/profile/UserHeader"
 import UserBio from "../Components/UI/profile/UserBio"
 
+
 const Profile = () => {
     const {userId , name} = useParams();
     const [isLoading , setisLoading] = useState(true);
@@ -21,7 +22,7 @@ const Profile = () => {
           }         
           fetchData();
           console.log(user);
-    },[userId])
+    },[userId,followers])
 
     if(isLoading) {
         return (
@@ -34,7 +35,7 @@ const Profile = () => {
     return (
             <div>
               <Header showBackArrow label={user.name} />
-              <UserHeader name={user.name} userId={user.id} coverImage={user.coverImage} />
+              <UserHeader name={user.name} userId={user.id} coverImage={user.coverImage} profileImage={user.profileImage} />
               <UserBio name={user.name} bio={user.bio} username={user.username} userId={userId} followersCount={followers} following={user?.followingIds?.length} />
             </div>
           )

@@ -4,9 +4,10 @@ interface userProps {
     userId : string;
     coverImage : string;
     name : string;
+    profileImage : string;
 }
 
-const UserHeader:React.FC<userProps> = ({userId , coverImage , name}) => {
+const UserHeader:React.FC<userProps> = ({userId , coverImage , name , profileImage}) => {
     
   return (
     <div className='bg-neutral-700 h-44 relative'>
@@ -15,7 +16,7 @@ const UserHeader:React.FC<userProps> = ({userId , coverImage , name}) => {
       ) }
 
       <div className='absolute -bottom-16 left-4'>
-          <Avatar name={name} userId={userId} isLarge hasBorder />
+          <Avatar name={name} profileImage={profileImage} userId={userId} isLarge hasBorder />
       </div>
     </div>
   )

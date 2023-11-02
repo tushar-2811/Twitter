@@ -25,8 +25,10 @@ const Avatar:React.FC<AvatarProps> = ({userId , isLarge ,hasBorder , profileImag
     `}>
 
       <NavLink to={`/profile/${userId}/${name}`}>
-        <img   
-        src={profile || profileImage} 
+        <img
+        height={isLarge ? 'h-32' : 'h-12'}  
+        width={isLarge ? 'w-32' : 'w-12' }
+        src={profileImage || profile} 
         alt="Avatar" 
         className="fill object-cover rounded-full " />
       </NavLink>

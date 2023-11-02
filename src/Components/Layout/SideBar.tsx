@@ -51,13 +51,14 @@ const SideBar = () => {
                  />
                ))
              }
-             <SideTweetButton/>
              
             {
               Cookies.get('authToken') ? (
                 <Button label='Log Out' fullWidth secondary onClick={handleLogout}/>
               ) : ("")
             }
+
+            <SideTweetButton/> 
           </div>
           
       </div>

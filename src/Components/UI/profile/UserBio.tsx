@@ -1,5 +1,7 @@
+import { useSetRecoilState } from "recoil";
 import Button from "../Button/Button";
 import Cookies from "js-cookie";
+import { EditModalSelector } from "../../../Store/Selectors/EditModalSelector";
 
 interface BioProps {
     bio : string;
@@ -12,7 +14,7 @@ interface BioProps {
 
 const UserBio:React.FC<BioProps> = ({bio , name , username , userId , following , followersCount}) => {
   let id = Cookies.get("userId");
-
+  const setEditModal = useSetRecoilState(EditModalSelector);
  
   return (
     <div className="border-b-[1px] border-neutral-800 pb-4">
@@ -22,7 +24,7 @@ const UserBio:React.FC<BioProps> = ({bio , name , username , userId , following 
               <Button 
           label="Edit"
           secondary
-          onClick={() => {}}
+          onClick={() => setEditModal({isOpen : true})}
           />
             ) : (
               <Button 
