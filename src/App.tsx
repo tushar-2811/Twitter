@@ -6,6 +6,7 @@ import LoginModal from './Components/modals/LoginModal'
 import RegisterModal from './Components/modals/RegisterModal'
 import { Toaster } from 'react-hot-toast'
 import Profile from './Pages/Profile'
+import EditModal from './Components/modals/EditModal'
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
     <>
      <LoginModal/>
      <RegisterModal/>
+     <EditModal/>
      <Toaster/>
       <Routes>
          <Route path='/' element={<Layout />}> 

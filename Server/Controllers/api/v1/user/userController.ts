@@ -39,11 +39,20 @@ export const getSingleUserController = async(req:Request , res:Response) => {
                 id : userId
             }
         })
+
+        const followersCount = await prisma.user.count({
+            where : {
+                followingIds : {
+                    has : userId
+                }
+            }
+        })
        
         return res.status(201).json({
             ok : true,
             msg : "user found",
-            user : singleUser
+            user : singleUser,
+            follwers : followersCount
         })
         
     } catch (error) {
@@ -55,3 +64,36 @@ export const getSingleUserController = async(req:Request , res:Response) => {
         })
     }
 }
+
+
+// To update a single user
+
+export const updateUserController = async(req : Request , res: Response) => {
+    try {
+        const userId = Number(req.params.id);
+        const {name , username , bio , profileImage , coverImage} = req.body;
+
+        const updatedUser = await prisma.user.update({
+            where : {
+                id : userId
+            },
+            data : {
+                name , username , bio , profileImage , coverImage
+            }
+        })
+
+        return res.status(201).json({
+            ok : true,
+            msg : "Updated Successfully",
+            user : updatedUser
+        })
+        
+    } catch (error) {
+        console.log(error);
+        return res.status(403).json({
+            ok : false,
+            msg : "something went wrong",
+            error
+        })
+    }
+} 

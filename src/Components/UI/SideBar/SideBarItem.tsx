@@ -1,6 +1,9 @@
 import React , {useCallback} from 'react';
 import {IconType} from 'react-icons'
 import {useNavigate} from 'react-router-dom'
+import Cookies from 'js-cookie';
+import { useSetRecoilState } from 'recoil';
+import { LoginModalSelector } from '../../../Store/Selectors/LoginModalSelector';
 
 interface SideBarProps {
     label : string;
@@ -16,11 +19,19 @@ const SideBarItem:React.FC<SideBarProps> = ({
     onClick
 }) => {
   const navigate = useNavigate();
+  const setLoginModal = useSetRecoilState(LoginModalSelector);
+  
 
   const handleClick = useCallback(() => {
-       if(onClick){
-          return onClick;
-       }
+    const authToken = Cookies.get("authToken");
+    if(!authToken){
+      setLoginModal({isOpen : true});
+      return;
+    }
+
+    if(onClick){
+      return onClick;
+    }
 
       if(href){
         navigate(href);

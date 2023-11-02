@@ -6,6 +6,7 @@ import SideTweetButton from '../UI/Button/SideTweetButton'
 import Button from '../UI/Button/Button'
 import Cookies from 'js-cookie'
 import { useNavigate } from 'react-router-dom'
+import toast from 'react-hot-toast'
 
 const SideBar = () => {
   const navigate = useNavigate();
@@ -22,14 +23,17 @@ const SideBar = () => {
     },
     {
       label : "Profile",
-      href : "/profile",
+      href : `/profile/${Cookies.get('userId')}/${Cookies.get('user')}`,
       icon : FaUser
     }
    ]
 
    const handleLogout = () => {
         Cookies.remove('authToken');
+        Cookies.remove('userId');
+        Cookies.remove('user');
         navigate('/');
+        toast.success("Logout successful");
    }
 
   return (

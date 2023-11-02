@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { useSetRecoilState } from 'recoil';
-import {allUsersSelector} from '../Store/Selectors/allUsersSelector'
+import {allUsersSelector} from '../Store/Selectors/EditModalSelector'
 
 export const useUsers = async() => {
      

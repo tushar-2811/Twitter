@@ -44,6 +44,8 @@ const LoginModal = () => {
            if(data.ok){
               setLoginModal({isOpen : false});
               Cookies.set('authToken' , data.token);
+              Cookies.set('userId' , data.user.id);
+              Cookies.set('user' , data.user.name);
               navigate('/');
               toast.success(data.msg);
            }else{

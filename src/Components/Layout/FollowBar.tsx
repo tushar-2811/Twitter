@@ -37,9 +37,9 @@ const FollowBar = () => {
           {/* <Avatar userId="123" profileImage={placeholder} isLarge={false} /> */}
           {
                   Users?.map((user:any) => (
-                    <div key={user.id} className='flex flex-col gap-4'>
+                    <div key={user.id} className='flex flex-row gap-4'>
                       <Avatar name={user.name} userId={user.id} profileImage={user.profileImage} isLarge={false} />
-                      <div className='flex flex-col '>
+                      <div className='flex flex-col'>
                         <p className='text-white font-semibold text-sm' > {user.name} </p>
                         <p className='text-neutral-400 text-sm '> @{user.username} </p>
                       </div>
