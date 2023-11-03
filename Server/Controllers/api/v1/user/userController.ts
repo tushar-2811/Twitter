@@ -33,6 +33,9 @@ export const getAllUsersController = async(req:Request , res:Response) => {
 export const getSingleUserController = async(req:Request , res:Response) => {
     try {
         const userId = Number(req.params.id);
+        if(!userId) {
+            return res.end();
+        }
 
         const singleUser = await prisma.user.findUnique({
             where : {
@@ -67,7 +70,6 @@ export const getSingleUserController = async(req:Request , res:Response) => {
 
 
 // To update a single user
-
 export const updateUserController = async(req : Request , res: Response) => {
     try {
         const userId = Number(req.params.id);

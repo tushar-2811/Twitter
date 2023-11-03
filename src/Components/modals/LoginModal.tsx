@@ -8,6 +8,8 @@ import toast from 'react-hot-toast'
 import axios from 'axios'
 import Cookies from 'js-cookie'
 import { useNavigate } from "react-router-dom";
+import { isAuthenticatedState } from "../../Store/Atoms/authState";
+import { authSelector } from "../../Store/Selectors/authSelector";
 
 
 const LoginModal = () => {
@@ -15,6 +17,7 @@ const LoginModal = () => {
    const registerModal =useRecoilValue(RegisterModalSelector);
    const setRegisterModal = useSetRecoilState(RegisterModalSelector);
    const setLoginModal = useSetRecoilState(LoginModalSelector);
+   const setisAutheticated = useSetRecoilState(authSelector);
    const [isLoading , setIsLoading] = useState(false);
    const [username , setUsername] = useState("");
    const [password , setPassword] = useState("");
@@ -46,6 +49,7 @@ const LoginModal = () => {
               Cookies.set('authToken' , data.token);
               Cookies.set('userId' , data.user.id);
               Cookies.set('user' , data.user.name);
+              setisAutheticated(true);
               navigate('/');
               toast.success(data.msg);
            }else{

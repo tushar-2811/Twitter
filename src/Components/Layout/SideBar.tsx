@@ -7,9 +7,13 @@ import Button from '../UI/Button/Button'
 import Cookies from 'js-cookie'
 import { useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
+import { useSetRecoilState } from 'recoil'
+import { authSelector } from '../../Store/Selectors/authSelector'
+
 
 const SideBar = () => {
   const navigate = useNavigate();
+  const setisAuthenticated = useSetRecoilState(authSelector);
    const items = [
      {
        label : "Home",
@@ -29,6 +33,7 @@ const SideBar = () => {
    ]
 
    const handleLogout = () => {
+        setisAuthenticated(false);
         Cookies.remove('authToken');
         Cookies.remove('userId');
         Cookies.remove('user');
