@@ -8,7 +8,7 @@ const Home = () => {
     <div >
        <Header  label="Home" />
        <Form/>
-       <PostFeed/>
+       <PostFeed url={"http://127.0.0.1:8000/api/v1/post/all-posts"} />
     </div>
   )
 }

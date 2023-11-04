@@ -18,10 +18,20 @@ export const creatPostController = async(req:Request , res:Response) => {
             userId
            }
         })
-
+        
+        const Posts = await prisma.post.findMany({
+            include : {
+                user : true,
+                comments : true
+            },
+            orderBy : {
+                id : "desc"
+            }
+        })
         return res.status(201).json({
             ok : "true",
-            msg : "New Post Published"
+            msg : "New Post Published",
+            post : Posts
         })
 
         
@@ -43,7 +53,7 @@ export const getAllPostController = async(req:Request , res:Response) => {
 
         const userPosts = await prisma.post.findMany({
             where : {
-                id : userId
+                userId : userId
             },
             include : {
                 user : true,

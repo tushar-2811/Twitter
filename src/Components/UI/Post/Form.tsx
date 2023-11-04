@@ -1,4 +1,4 @@
-import { useRecoilValue, useSetRecoilState } from "recoil"
+import {  useRecoilValue, useSetRecoilState } from "recoil"
 import Button from "../Button/Button"
 import { LoginModalSelector } from "../../../Store/Selectors/LoginModalSelector"
 import { RegisterModalSelector } from "../../../Store/Selectors/RegisterModalSelector";
@@ -8,6 +8,7 @@ import Cookies from "js-cookie";
 import {useState} from 'react'
 import axios from "axios";
 import toast from "react-hot-toast";
+import { PostSelector } from "../../../Store/Selectors/PostSelector";
 
 
 
@@ -16,15 +17,26 @@ const Form = () => {
     const setLoginModal = useSetRecoilState(LoginModalSelector);
     const setRegisterModal = useSetRecoilState(RegisterModalSelector);
     const isAuthenticated = useRecoilValue(authSelector);
+    const setPostList = useSetRecoilState(PostSelector);
+    
     const [body , setBody] = useState("");
     const [isLoading , setIsLoading] = useState(false);
 
     const handleUploadPost = async() => {
-          setIsLoading(true);
+      try {
+        setIsLoading(true);
           const {data} = await axios.post(`http://127.0.0.1:8000/api/v1/post/${Number(Cookies.get("userId"))}/create-post` , {body});
           setIsLoading(false);
           setBody("");
+          // setPostList([...data.p]
+          setPostList(data.post);
           toast.success(data.msg);
+        
+      } catch (error) {
+        console.log(error);
+        toast.error("something went bad");
+      }
+         
     }
     
   return (
