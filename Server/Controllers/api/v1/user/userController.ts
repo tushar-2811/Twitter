@@ -99,3 +99,102 @@ export const updateUserController = async(req : Request , res: Response) => {
         })
     }
 } 
+
+
+// check is LIked
+
+export const isLikedController = async(req:Request , res:Response) => {
+    try {
+        const userId = Number(req.params.userId) ;
+        const postId = Number(req.params.postId) ;
+
+        const post = await prisma.post.findUnique({
+            where : {
+                id : postId
+            }
+        })
+
+        const isPresent = post?.likedIds.find((likedUserId) => {
+            return likedUserId === userId;
+        })
+
+
+        if(!isPresent) {
+            return res.status(201).json({
+                ok : true,
+                isLiked : false
+            })
+        }
+
+        return res.status(201).json({
+            ok : true,
+            isLiked : true
+        })
+        
+    } catch (error) {
+        console.log(error);
+        return res.status(403).json({
+            ok : false,
+            error
+        })
+    }
+}
+
+
+
+// update-like
+export const updateLikeController = async(req:Request , res:Response) => {
+    try {
+        const userId = Number(req.params.userId);
+        const postId = Number(req.params.postId);
+        const status = Number(req.params.status);
+
+        const post = await prisma.post.findUnique({
+            where : {
+                id : postId
+            }
+        });
+
+        if(status === 0){
+           
+            const newIds = post?.likedIds.filter(id => id !== userId);
+            const updatedPost = await prisma.post.update({
+                where : {
+                    id : postId
+                },
+                data : {
+                    likedIds : newIds
+                }
+            })
+
+            return res.status(201).json({
+                ok : true,
+                msg : "removed Like"
+            })
+
+        }else{
+          post?.likedIds.push(userId);
+          const updatedPost = await prisma.post.update({
+            where : {
+                id : postId
+            },
+            data : {
+                likedIds : post?.likedIds
+            }
+        })
+
+        return res.status(201).json({
+            ok : true,
+            msg : "added like"
+        })        
+
+        }
+        
+    } catch (error) {
+        console.log(error);
+        return res.status(403).json({
+            ok : false,
+            error
+        })
+    }
+}

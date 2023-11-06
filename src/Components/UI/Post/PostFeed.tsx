@@ -36,6 +36,7 @@ const PostFeed:React.FC<PostProps> = ({url}) => {
       {
         PostList.map((post) => (
           <PostItem userId={String(post.userId)} 
+                    postId={Number(post.id)}
                     key={post.id}
                     body={post?.body}
                     name={post.user?.name}
