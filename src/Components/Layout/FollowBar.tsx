@@ -18,7 +18,7 @@ const FollowBar = () => {
         }
         
         fetchData();
-    },[Users])
+    },[])
    
 
     if(isLoading) {

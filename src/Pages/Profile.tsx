@@ -5,7 +5,7 @@ import {ClipLoader} from 'react-spinners'
 import Header from "../Components/UI/Header/Header"
 import UserHeader from "../Components/UI/profile/UserHeader"
 import UserBio from "../Components/UI/profile/UserBio"
-import UserPostFeed from "../Components/UI/Post/userPostFeed"
+import UserPostFeed from "../Components/UI/Post/UserPostFeed"
 
 
 const Profile = () => {

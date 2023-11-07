@@ -24,26 +24,26 @@ const PostItem:React.FC<postItemProps> = (
 
     const setLoginModal = useSetRecoilState(LoginModalSelector);
     const authState = useRecoilValue(authSelector);
-    const [totalLiked , setTotalLiked] = useState(like);
+    // const [totalLiked , setTotalLiked] = useState(like);
     const [isLiked , setIsLiked] = useState<boolean>();
 
-    useEffect(() => {
-      if(!authState){
-        setIsLiked(false);
-         return;
-      }
+    // useEffect(() => {
+    //   if(!authState){
+    //     setIsLiked(false);
+    //      return;
+    //   }
 
-      const checkIsLiked = async() => {
-            const {data} = await axios.get(`http://127.0.0.1:8000/api/v1/user/${Number(Cookies.get("userId"))}/${Number(postId)}/check`);
-            if(data.isLiked) {
-               setIsLiked(true);
-            }else{
-              setIsLiked(false);
-            }
-      }
+    //   const checkIsLiked = async() => {
+    //         const {data} = await axios.get(`http://127.0.0.1:8000/api/v1/user/${Number(Cookies.get("userId"))}/${Number(postId)}/check`);
+    //         if(data.isLiked) {
+    //            setIsLiked(true);
+    //         }else{
+    //           setIsLiked(false);
+    //         }
+    //   }
 
-      checkIsLiked();
-    } ,[authState])
+    //   checkIsLiked();
+    // } ,[authState])
 
     const handleLike = async() => {
          try {
@@ -136,7 +136,7 @@ const PostItem:React.FC<postItemProps> = (
               `} >
                  <AiOutlineHeart size={20} />
                  <p> 
-                  {totalLiked || 0}
+                  {like|| 0}
                  </p>
               </div>
 

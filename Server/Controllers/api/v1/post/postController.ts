@@ -1,10 +1,7 @@
 import { Request , Response } from "express"
 import { PrismaClient } from "@prisma/client";
 
-const prisma = new PrismaClient({
-    log: ['query', 'info', 'warn', 'error'],
-});
-
+const prisma = new PrismaClient();
 
 // to create Post
 export const creatPostController = async(req:Request , res:Response) => {
