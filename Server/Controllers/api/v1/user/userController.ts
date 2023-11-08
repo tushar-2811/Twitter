@@ -55,7 +55,7 @@ export const getSingleUserController = async(req:Request , res:Response) => {
             ok : true,
             msg : "user found",
             user : singleUser,
-            follwers : followersCount
+            followers : followersCount
         })
         
     } catch (error) {
