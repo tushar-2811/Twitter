@@ -1,27 +1,41 @@
-# React + TypeScript + Vite
+# Twitter-Clone 
+Node.js | React.js | TypeScript | Express | PrismaORM | PostgreSQL | Zod 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This repo is a Twitter clone and is created with the help of above tech stack.
 
-Currently, two official plugins are available:
+Node.js -> A JavaScript runtime that's great for server-side development. It's known for its event-driven, non-blocking I/O model, making it efficient and lightweight. 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+React.js -> React.js is a popular JavaScript library for building user interfaces, developed by Facebook. It's known for its component-based architecture, which makes it easy to build reusable and maintainable UI components.
+
+
+TypeScript -> TypeScript, the statically typed superset of JavaScript! It adds optional static typing to your JavaScript code, which can catch errors during development and make your code more robust.
+
+
+Express -> Express.js, the minimalist and flexible Node.js web application framework! It simplifies the process of building robust and scalable web applications and APIs. Whether you're creating a simple website or a complex server-side application.
+
+
+PrismORM -> Prisma, the sleek and powerful open-source database toolkit for Node.js and TypeScript! It simplifies database access and management by providing a type-safe and auto-generated query builder.
+
+
+Postgresql -> Ah, PostgreSQL, the open-source relational database management system! Known for its extensibility and compliance with SQL standards.
+
+
+Zod -> Zod, the TypeScript-first schema declaration and validation library! It helps you define and validate data structures with ease, ensuring type safety and consistency in your TypeScript projects.
+
+
+# How to Setup Locally
+step 1. Clone the Repo.
+
+step 2. Install fontend and backend dependencies.
+Run npm install and then again run the same cmd in Server Folder
+
+step 3. In Server , Run tsc -b .
+
+step 4. Start the Backend , with cmd : node dist/index.js
+
+step 5. Start the frontend with cmd : npm run dev
+
 
 ## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
