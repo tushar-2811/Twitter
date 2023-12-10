@@ -11,8 +11,8 @@ export const isAuthenticated = async(req: Request , res: Response , next : NextF
         if(!auth) {
             return res.status(403).json({
                 ok : false,
-                msg : "user not authorized"
-                hey
+                msg : "user not authorized",
+               
             })
         }
         
